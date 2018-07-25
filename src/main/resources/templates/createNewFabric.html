@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create New Fabric</title>
+    </head>
+
+    <body>
+        <h1>Create A New Fabric Entry</h1>
+
+        <main>
+            <form action="/api/fabrics" method="POST">
+                Name: <input type="text" name="name" th:value="name"/>
+                Category: <input type="text" name="category" th:value="category"/>
+                Fabric Base: <input type="text" name="base" th:value="base"/>
+                Store: <input type="text" name="bestStore" th:value="bestStore"/>
+                Custom: <input type="text" name="isCustom" th:value="isCustom"/>
+                <input type="submit" />
+            </form>
+        </main>
+        <script src="public/js/form.js"></script>
+    </body>
+</html>
