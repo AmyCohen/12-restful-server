@@ -14,14 +14,15 @@
             <div>
                 <ul>
                     <li th:each="fabric : ${fabrics}">
-                        <p><span th:text="${fabric.name}" /> is a
+                        <p><a th:href="'/fabrics/' + ${fabric.id} + '/edit'">EDIT</a><br> <br>
+                            ID: <span th:text="${fabric.id}"/>
+                            <span th:text="${fabric.name}" /> is a
                             <span th:text="${fabric.category}" /> with a fiber base of
                             <span th:text="${fabric.base}" /> and is available through
                             <span th:text="${fabric.bestStore}" />. <br>CUSTOM =
                             <span th:text="${fabric.isCustom}" />. <br>
-                            <a th:href="'/fabrics' + ${fabric.id} + '/edit'">EDIT</a>
                         </p>
-
+                        <hr>
                     </li>
                 </ul>
             </div>

@@ -5,6 +5,7 @@ import models.FabricStorage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -17,9 +18,10 @@ Using FabricHTML and FabricAPI as separation of concerns for better structuring 
  */
 
 @Controller
-@RequestMapping("/fabric")
+@RequestMapping("/fabrics")
 public class FabricHTML {
-    //List the entire fabric stash
+
+    //LIST the entire fabric stash
     @GetMapping
     public String allFabric (Model model) {
         Collection<Fabric> fabrics = FabricStorage.fabrics.values();
@@ -29,19 +31,32 @@ public class FabricHTML {
         return "allFabric";
     }
 
+    //CREATE an HTML form
+    @GetMapping("/new")
+    public String createNewFabricForm() {
+        return "createNewFabric";
+    }
+
+    //UPDATE an HTML form
+    @GetMapping("/{id}/edit")
+    public String editFabricForm(
+            @PathVariable("id") int id,
+            Model model
+    ) {
+        Fabric fabricEditing = FabricStorage.fabrics.get(id);
+
+        model.addAttribute("id", fabricEditing.id);
+        model.addAttribute("name", fabricEditing.name);
+        model.addAttribute("category", fabricEditing.category);
+        model.addAttribute("base", fabricEditing.base);
+        model.addAttribute("bestStore", fabricEditing.bestStore);
+        model.addAttribute("isCustom", fabricEditing.isCustom);
+
+        return "editFabrics";
+    }
+
 }
 
 /*
-@Controller
-@RequestMapping("/mountains")
-public class MountainHTML {
-    // list all mountains page
-    @GetMapping
-    public String showAllMountains(Model model) {
-        Collection<Mountain> mountains = MountainStorage.mountains.values();
-        List<Mountain> list = new ArrayList<>(mountains);
 
-        model.addAttribute("mountains", mountains);
-        return "all_mountains";
-    }
-    */
+*/
