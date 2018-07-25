@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fabric Stash</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="/fabrics/new">Add New Fabric</a>
+        </header>
+
+        <main>
+            <div>
+                <ul>
+                    <li th:each="fabric : ${fabrics}">
+                        <p><span th:text="${fabric.name}" /> is a
+                            <span th:text="${fabric.category}" /> with a fiber base of
+                            <span th:text="${fabric.base}" /> and is available through
+                            <span th:text="${fabric.bestStore}" />. <br>CUSTOM =
+                            <span th:text="${fabric.isCustom}" />. <br>
+                            <a th:href="'/fabrics' + ${fabric.id} + '/edit'">EDIT</a>
+                        </p>
+
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </body>
+</html>
