@@ -14,8 +14,8 @@
             <div>
                 <ul>
                     <li th:each="fabric : ${fabrics}">
-                        <p><a th:href="'/fabrics/' + ${fabric.id} + '/edit'">EDIT</a><br> <br>
-                            ID: <span th:text="${fabric.id}"/>
+                        <p><a th:href="'/fabrics/' + ${fabric.id} + '/edit'">EDIT</a><br>
+                            ID: <span th:text="${fabric.id}"/><br>
                             <span th:text="${fabric.name}" /> is a
                             <span th:text="${fabric.category}" /> with a fiber base of
                             <span th:text="${fabric.base}" /> and is available through

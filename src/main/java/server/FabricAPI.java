@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/fabrics")
+@RequestMapping("api/fabrics")
 public class FabricAPI {
 
     //CREATE
@@ -33,8 +33,21 @@ public class FabricAPI {
 
         Fabric newFabric = new Fabric(name, catagory, base, bestStore, isCustom);
         FabricStorage.fabrics.put(newFabric.id, newFabric);
+
         return new ModelAndView("forward:/fabrics");
     }
+
+    /*
+    ===== POSSIBLE HELP =====
+    @GetMapping("/goToViewPage")
+    public ModelAndView passParametersWithModelAndView() {
+        ModelAndView modelAndView = new ModelAndView("viewPage");
+        modelAndView.addObject("message", "Baeldung");
+        return modelAndView;
+    }
+     */
+
+
 
     //READ ALL
     @GetMapping
