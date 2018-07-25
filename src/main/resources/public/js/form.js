@@ -29,6 +29,6 @@ fetch(ev.target.action, {
     method: ev.target.getAttribute("method"),
     body: body
 }).then(() => {
-    window.location = "http://localhost:8080/fabrics";
+    window.location = HOMEPAGE;
 });
 })

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,21 +23,25 @@ public class FabricAPI {
 
     //CREATE
     @PostMapping
-    @ResponseBody
     public ModelAndView createFabric(
         @RequestParam("name") String name,
         @RequestParam("category") String catagory,
         @RequestParam("base") String base,
         @RequestParam("bestStore") String bestStore,
         @RequestParam("isCustom") Boolean isCustom
-        ){
+        ) throws IOException {
 
         Fabric newFabric = new Fabric(name, catagory, base, bestStore, isCustom);
         FabricStorage.fabrics.put(newFabric.id, newFabric);
 
-        return new ModelAndView("forward:/fabrics");
+        return new ModelAndView("redirect:/fabrics");
+//        return sendRedirect("allFabric");
     }
 
+//    private String sendRedirect(String location)
+//            throws IOException {
+//        return location;
+//    }
     /*
     ===== POSSIBLE HELP =====
     @GetMapping("/goToViewPage")
