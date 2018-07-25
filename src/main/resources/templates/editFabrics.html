@@ -8,7 +8,9 @@
         <h1>Edit Fabric Information</h1>
 
         <p>ID: <span th:text="${id}"/> </p>
+        <!--<form id="edit-form" action="/fabrics" method="PUT">-->
         <form id="edit-form" th:action="'/api/fabrics/' + ${id}" method="PUT">
+
             Name: <input type="text" name="name" th:value="${name}"/>
             Category: <input type="text" name="category" th:value="${category}"/>
             Fabric Base: <input type="text" name="base" th:value="${base}"/>
@@ -16,9 +18,9 @@
             Custom: <input type="text" name="isCustom" th:value="${isCustom}"/>
 
             <button id="deleteFabric">DELETE</button>
-            <input type="submit" value="save"/>
+            <input type="submit" value="SAVE"/>
         </form>
 
-        <script src="public/js/form.js"></script>
+        <script src="\js\form.js"></script>
     </body>
 </html>

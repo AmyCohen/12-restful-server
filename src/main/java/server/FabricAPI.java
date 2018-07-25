@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,32 +23,19 @@ public class FabricAPI {
 
     //CREATE
     @PostMapping
-    @ResponseBody
     public ModelAndView createFabric(
         @RequestParam("name") String name,
         @RequestParam("category") String catagory,
         @RequestParam("base") String base,
         @RequestParam("bestStore") String bestStore,
         @RequestParam("isCustom") Boolean isCustom
-        ){
+        ) {
 
         Fabric newFabric = new Fabric(name, catagory, base, bestStore, isCustom);
         FabricStorage.fabrics.put(newFabric.id, newFabric);
 
-        return new ModelAndView("forward:/fabrics");
+        return new ModelAndView("redirect:/fabrics");
     }
-
-    /*
-    ===== POSSIBLE HELP =====
-    @GetMapping("/goToViewPage")
-    public ModelAndView passParametersWithModelAndView() {
-        ModelAndView modelAndView = new ModelAndView("viewPage");
-        modelAndView.addObject("message", "Baeldung");
-        return modelAndView;
-    }
-     */
-
-
 
     //READ ALL
     @GetMapping
@@ -68,6 +56,29 @@ public class FabricAPI {
     //UPDATE
     @PutMapping("/{id}")
     @ResponseBody
+    public ModelAndView updateFabricEntry(
+        @PathVariable("id") int id,
+        @RequestBody String body
+    ){
+        Gson gson = new Gson();
+        Fabric updateFabric = gson.fromJson(body, Fabric.class);
+
+        Fabric fabrics = FabricStorage.fabrics.get(id);
+        fabrics.name = updateFabric.name;
+        fabrics.category = updateFabric.category;
+        fabrics.base = updateFabric.base;
+        fabrics.bestStore = updateFabric.bestStore;
+        fabrics.isCustom = updateFabric.isCustom;
+
+        //I thought this was supposed to redirect to the fabrics page after clicking save but it doesn't.
+        return new ModelAndView("redirect:/fabrics");
+    }
+
+    /*
+    ===== ORIGINAL FUNCTION =====
+        //UPDATE
+    @PutMapping("/{id}")
+    @ResponseBody
     public Fabric updateFabricEntry(
         @PathVariable("id") int id,
         @RequestBody String body
@@ -84,6 +95,8 @@ public class FabricAPI {
 
         return updateFabric;
     }
+
+     */
 
     //DESTROY
     @DeleteMapping("/{id}")
